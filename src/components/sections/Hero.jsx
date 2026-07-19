@@ -10,8 +10,11 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden"
     >
-      {/* Background Grids & Ambient Glows */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
+      {/* Background Grid — fades toward centre so text stays crisp */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-70 pointer-events-none z-0"
+           style={{ WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, black 80%)', maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, black 80%)' }} />
+
+      {/* Ambient radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-radial-glow pointer-events-none z-0" />
 
       {/* Main Content */}
@@ -40,14 +43,14 @@ const Hero = () => {
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3.5 mt-6 w-full sm:w-auto">
           <MagneticButton
-            className="w-full bg-accent text-[#0A0A0A] border-accent hover:bg-accent/85 hover:border-accent/85"
+            className="w-full bg-accent text-[#0A0A0A] border-accent hover:text-accent hover:border-white"
             onClick={() => scrollToSection('#projects')}
           >
             View Work
             <ArrowRight size={14} className="stroke-[2.5]" />
           </MagneticButton>
           <a href={socialsData.resumeUrl} download className="w-full sm:w-auto">
-            <MagneticButton className="w-full bg-transparent border-border hover:border-text">
+            <MagneticButton className="w-full bg-transparent border-border hover:text-accent hover:border-white">
               Download Resume
               <Download size={14} className="stroke-[2.5]" />
             </MagneticButton>

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../animations/gsapConfig';
 import { useScrollReveal } from '../../animations/useScrollReveal';
@@ -9,6 +9,73 @@ import {
 import { scrollToSection } from '../../lib/lenis';
 
 /* ─── helpers ──────────────────────────────────────────────── */
+
+/** Animated dot-matrix canvas */
+const DotMatrix = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const GAP = 24;          // px between dot centres
+    const RADIUS = 1.5;      // dot radius
+    const COLOR = '124,92,255'; // accent RGB
+    let raf;
+    let t = 0;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const cols = Math.ceil(canvas.width  / GAP) + 1;
+      const rows = Math.ceil(canvas.height / GAP) + 1;
+      const cx = canvas.width  / 2;
+      const cy = canvas.height / 2;
+      const maxDist = Math.hypot(cx, cy);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * GAP;
+          const y = r * GAP;
+          const dist = Math.hypot(x - cx, y - cy);
+          const norm = dist / maxDist;                          // 0 (centre) → 1 (corner)
+          // Wave phase: ripple outward from centre
+          const wave = prefersReduced ? 0 : Math.sin(t * 0.8 - dist * 0.018) * 0.5;
+          const alpha = Math.max(0, (0.18 - norm * 0.14) + wave * 0.06);
+          ctx.beginPath();
+          ctx.arc(x, y, RADIUS, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${COLOR},${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+      t++;
+      raf = requestAnimationFrame(draw);
+    };
+
+    draw();
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      aria-hidden="true"
+    />
+  );
+};
 
 /** Marquee strip of tech badges that scroll infinitely */
 const TechMarquee = () => {
@@ -213,6 +280,13 @@ const About = () => {
       className="relative py-28 bg-base border-t border-border overflow-hidden"
       onMouseMove={handleMouseMove}
     >
+
+      {/* Dot matrix animated backdrop */}
+      <DotMatrix />
+
+      {/* Static grid overlay (lower opacity so dots read through) */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none z-0" />
+
       {/* Mouse-chasing glow orb */}
       <div
         ref={glowRef}

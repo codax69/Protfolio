@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../animations/gsapConfig';
 import { useScrollReveal } from '../../animations/useScrollReveal';
+import DepthCard from '../ui/DepthCard';
 import {
   Github, ExternalLink, Star, GitFork,
   MapPin, Users, BookMarked, Activity, Code2
@@ -45,126 +46,69 @@ const CountUp = ({ target, duration = 1.2 }) => {
   return <span ref={ref}>0</span>;
 };
 
-/* ─── Repo card with micro-interactions ─────────────────── */
 const RepoCard = ({ repo }) => {
-  const cardRef  = useRef(null);
-  const lineRef  = useRef(null);
-
-  useGSAP(() => {
-    const card = cardRef.current;
-    const line = lineRef.current;
-    if (!card || !line) return;
-
-    const isHoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!isHoverable || prefersReduced) return;
-
-    const rotX = gsap.quickTo(card, 'rotateX', { duration: 0.35, ease: 'power2.out' });
-    const rotY = gsap.quickTo(card, 'rotateY', { duration: 0.35, ease: 'power2.out' });
-
-    const onMove = (e) => {
-      const r   = card.getBoundingClientRect();
-      const nx  = ((e.clientX - r.left) / r.width  - 0.5) * 2;
-      const ny  = ((e.clientY - r.top)  / r.height - 0.5) * 2;
-      rotY(nx * 6);
-      rotX(-ny * 6);
-    };
-    const onEnter = () => {
-      gsap.to(line, { scaleX: 1, duration: 0.35, ease: 'power2.out', transformOrigin: 'left' });
-      gsap.to(card, { z: 12, duration: 0.35 });
-    };
-    const onLeave = () => {
-      rotX(0); rotY(0);
-      gsap.to(card, { z: 0, duration: 0.5, ease: 'elastic.out(1,0.4)' });
-      gsap.to(line, { scaleX: 0, duration: 0.25, ease: 'power2.in', transformOrigin: 'left' });
-    };
-
-    card.addEventListener('mousemove',  onMove);
-    card.addEventListener('mouseenter', onEnter);
-    card.addEventListener('mouseleave', onLeave);
-    return () => {
-      card.removeEventListener('mousemove',  onMove);
-      card.removeEventListener('mouseenter', onEnter);
-      card.removeEventListener('mouseleave', onLeave);
-    };
-  }, { scope: cardRef });
-
   return (
-    <div
-      ref={cardRef}
-      style={{ transformStyle: 'preserve-3d', perspective: '800px' }}
-      className="reveal-item relative flex flex-col justify-between h-full
-                 bg-surface border border-border rounded-2xl p-5
-                 transition-shadow duration-300 will-change-transform
-                 hover:shadow-[0_20px_60px_rgba(124,92,255,0.14)] hover:border-accent/30"
-    >
-      {/* Accent underline sweep */}
-      <div
-        ref={lineRef}
-        className="absolute bottom-0 left-0 h-[2px] w-full bg-accent rounded-b-2xl"
-        style={{ transform: 'scaleX(0)', transformOrigin: 'left' }}
-      />
-
-      {/* Inner z-layer */}
-      <div style={{ transform: 'translateZ(18px)' }}>
-        {/* Visibility badge */}
-        <span className="inline-block text-[9px] font-bold uppercase tracking-widest px-2 py-0.5
-                         border border-border text-muted rounded-full mb-4 bg-base/50">
-          {repo.visibility}
-        </span>
-
-        {/* Repo name */}
-        <a
-          href={repo.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-2 mb-2"
-        >
-          <Code2 size={15} className="text-accent shrink-0" />
-          <span className="font-display font-bold text-base text-text
-                           group-hover:text-accent transition-colors duration-200 truncate">
-            {repo.name}
+    <div className="reveal-item h-full">
+      <DepthCard className="h-full flex flex-col justify-between p-5">
+        <div>
+          {/* Visibility badge */}
+          <span className="inline-block text-[9px] font-bold uppercase tracking-widest px-2 py-0.5
+                           border border-border text-muted rounded-full mb-4 bg-base/50">
+            {repo.visibility}
           </span>
-          <ExternalLink size={11} className="text-muted shrink-0 opacity-0 group-hover:opacity-100
-                                              transition-opacity duration-200 ml-auto" />
-        </a>
 
-        {/* Description */}
-        <p className="text-xs text-muted font-light leading-relaxed line-clamp-2 min-h-[2.4rem] mb-4">
-          {repo.description || 'No description provided.'}
-        </p>
-      </div>
-
-      {/* Stats row */}
-      <div style={{ transform: 'translateZ(8px)' }}
-           className="flex items-center justify-between pt-4 border-t border-border mt-auto">
-        <div className="flex items-center gap-3 text-xs text-muted">
-          {repo.language && (
-            <span className="flex items-center gap-1.5 font-medium text-text/70">
-              <span
-                className="w-2.5 h-2.5 rounded-full shrink-0"
-                style={{ backgroundColor: langColor(repo.language) }}
-              />
-              {repo.language}
+          {/* Repo name */}
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 mb-2"
+          >
+            <Code2 size={15} className="text-accent shrink-0" />
+            <span className="font-display font-bold text-base text-text
+                             group-hover:text-accent transition-colors duration-200 truncate">
+              {repo.name}
             </span>
-          )}
-          <span className="flex items-center gap-1">
-            <Star size={11} /> {repo.stargazers_count}
-          </span>
-          <span className="flex items-center gap-1">
-            <GitFork size={11} /> {repo.forks_count}
-          </span>
+            <ExternalLink size={11} className="text-muted shrink-0 opacity-0 group-hover:opacity-100
+                                                transition-opacity duration-200 ml-auto" />
+          </a>
+
+          {/* Description */}
+          <p className="text-xs text-muted font-light leading-relaxed line-clamp-2 min-h-[2.4rem] mb-4">
+            {repo.description || 'No description provided.'}
+          </p>
         </div>
 
-        <a
-          href={repo.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[11px] font-semibold text-accent hover:underline"
-        >
-          View →
-        </a>
-      </div>
+        {/* Stats row */}
+        <div className="flex items-center justify-between pt-4 border-t border-border mt-auto">
+          <div className="flex items-center gap-3 text-xs text-muted">
+            {repo.language && (
+              <span className="flex items-center gap-1.5 font-medium text-text/70">
+                <span
+                  className="w-2.5 h-2.5 rounded-full shrink-0"
+                  style={{ backgroundColor: langColor(repo.language) }}
+                />
+                {repo.language}
+              </span>
+            )}
+            <span className="flex items-center gap-1">
+              <Star size={11} /> {repo.stargazers_count}
+            </span>
+            <span className="flex items-center gap-1">
+              <GitFork size={11} /> {repo.forks_count}
+            </span>
+          </div>
+
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] font-semibold text-accent hover:underline"
+          >
+            View →
+          </a>
+        </div>
+      </DepthCard>
     </div>
   );
 };

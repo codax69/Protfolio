@@ -1,12 +1,41 @@
 import React, { useRef } from 'react';
 import { Calendar } from 'lucide-react';
 import { useScrollReveal } from '../../animations/useScrollReveal';
+import { useGSAP } from '@gsap/react';
+import { gsap } from '../../animations/gsapConfig';
 
 const Education = () => {
   const containerRef = useRef(null);
+  const timelineRef = useRef(null);
+  const progressBarRef = useRef(null);
 
   // Stagger reveal education nodes
   useScrollReveal(containerRef, '.reveal-item', 0.12);
+
+  // Animate the timeline progress bar on scroll (scrubbing)
+  useGSAP(() => {
+    if (!progressBarRef.current || !timelineRef.current) return;
+    
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      gsap.set(progressBarRef.current, { scaleY: 1 });
+      return;
+    }
+
+    gsap.fromTo(progressBarRef.current,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: timelineRef.current,
+          start: "top 75%",
+          end: "bottom 70%",
+          scrub: 0.5
+        }
+      }
+    );
+  }, { scope: containerRef });
 
   const educationData = [
     {
@@ -21,7 +50,6 @@ const Education = () => {
       year: "2025",
       details: "Focus on networking, hardware maintenance, software systems administration, and fundamental IT operations."
     },
-    
     {
       institution: "GSHSEB",
       degree: "10th Standard Secondary Education",
@@ -31,17 +59,26 @@ const Education = () => {
   ];
 
   return (
-    <section ref={containerRef} id="education" className="py-24 bg-base border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={containerRef} id="education" className="relative py-24 bg-base border-t border-border overflow-hidden">
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">05 / Academics</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">06 / Academics</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Education</h2>
         </div>
 
-        {/* Minimal Timeline */}
-        <div className="max-w-3xl relative border-l border-border pl-6 ml-4 md:pl-8 md:ml-8 flex flex-col gap-8">
+        {/* Timeline */}
+        <div ref={timelineRef} className="max-w-3xl relative border-l border-border pl-6 ml-4 md:pl-8 md:ml-8 flex flex-col gap-8">
+          
+          {/* Vertical scroll progress indicator */}
+          <div
+            ref={progressBarRef}
+            className="absolute top-0 left-0 w-[2px] bg-accent origin-top h-full scale-y-0"
+            style={{ left: '-1px' }} // Center exactly on the border-l
+          />
+
           {educationData.map((edu, index) => (
             <div key={index} className="relative group reveal-item">
               {/* Marker */}

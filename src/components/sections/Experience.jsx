@@ -39,8 +39,9 @@ const Experience = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} id="experience" className="py-24 bg-base border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={containerRef} id="experience" className="relative py-24 bg-base border-t border-border overflow-hidden">
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">

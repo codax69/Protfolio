@@ -81,12 +81,13 @@ const Contact = () => {
   };
 
   return (
-    <section ref={containerRef} id="contact" className="py-24 bg-base border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={containerRef} id="contact" className="relative py-24 bg-base border-t border-border overflow-hidden">
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">06 / Inquiry</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">07 / Inquiry</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Get In Touch</h2>
         </div>
 
