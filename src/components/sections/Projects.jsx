@@ -8,8 +8,8 @@ import { gsap } from '../../animations/gsapConfig';
 
 const ImageWithFallback = ({ src, alt, className }) => {
   const [hasError, setHasError] = useState(false);
-  if (hasError) {
-    return <div className="absolute inset-0 flex items-center justify-center bg-surface text-xs text-muted font-mono uppercase tracking-wider">{alt}</div>;
+  if (hasError || !src) {
+    return <div className="absolute inset-0 flex items-center justify-center bg-surface text-xs text-muted font-mono uppercase tracking-wider text-center p-4">{alt}</div>;
   }
   return <img src={src} alt={alt} className={className} onError={() => setHasError(true)} />;
 };
@@ -108,7 +108,7 @@ const ProjectImageSlider = ({ images, title, fallbackImage }) => {
         {images.map((imgSrc, idx) => (
           <div key={idx} className="h-full relative flex-shrink-0" style={{ width: `${100 / totalSlides}%` }}>
             <img
-              src={imgSrc}
+              src={imgSrc || null}
               alt={`${title} screenshot ${idx + 1}`}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -164,7 +164,7 @@ const Projects = () => {
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">04 / Creations</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Creations</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Featured Projects</h2>
         </div>
 
@@ -189,7 +189,7 @@ const Projects = () => {
                         title={project.title}
                         fallbackImage={project.image}
                       />
-                      <div className="absolute top-4 left-4 bg-base/80 backdrop-blur-sm border border-border px-3 py-1 rounded-full text-xs font-semibold text-accent z-20">
+                      <div className="absolute top-4 left-4 bg-gradient-to-br from-[#141414]/90 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 px-3 py-1 rounded-full text-xs font-semibold text-accent z-20 shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
                         {project.type}
                       </div>
                     </div>
@@ -202,13 +202,13 @@ const Projects = () => {
                           <h3 className="font-display font-bold text-2xl text-text leading-tight">
                             {project.title}
                           </h3>
-                          <span className="text-xs font-medium text-muted bg-base/50 border border-border px-2.5 py-1 rounded-full whitespace-nowrap">
+                          <span className="text-xs font-medium text-muted bg-gradient-to-br from-[#141414]/90 to-[#0A0A0A]/95 border border-[#7C5CFF]/10 px-2.5 py-1 rounded-full whitespace-nowrap shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
                             {project.date}
                           </span>
                         </div>
 
                         {/* Impact Statement */}
-                        <p className="text-sm md:text-base text-muted font-light leading-relaxed mb-6">
+                        <p className="text-sm md:text-text text-muted font-light leading-relaxed mb-6">
                           {project.impact}
                         </p>
 
@@ -217,7 +217,7 @@ const Projects = () => {
                           {project.tech.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="text-xs px-2.5 py-1 rounded-md border border-border bg-base/30 text-muted"
+                              className="text-xs px-2.5 py-1 rounded-xl border border-white/5 bg-gradient-to-br from-[#1c1c1c] to-[#0d0d0d] text-muted hover:text-accent hover:border-[#7C5CFF]/40 shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)] transition-all duration-300 cursor-default"
                             >
                               {tag}
                             </span>

@@ -45,7 +45,7 @@ const Experience = () => {
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">03 / History</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">History</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Experience</h2>
         </div>
 

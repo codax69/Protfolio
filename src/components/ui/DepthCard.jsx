@@ -15,39 +15,24 @@ const DepthCard = ({ children, className = "" }) => {
     if (!isHoverable || prefersReducedMotion) return;
 
     // quickTo targets for buttery smooth updates
-    const rotateXTo = gsap.quickTo(card, "rotateX", { duration: 0.3, ease: "power2.out" });
-    const rotateYTo = gsap.quickTo(card, "rotateY", { duration: 0.3, ease: "power2.out" });
+    const rotationXTo = gsap.quickTo(card, "rotationX", { duration: 0.3, ease: "power2.out" });
+    const rotationYTo = gsap.quickTo(card, "rotationY", { duration: 0.3, ease: "power2.out" });
     const zTo = gsap.quickTo(card, "z", { duration: 0.3, ease: "power2.out" });
 
     const handleMouseMove = (e) => {
       const rect = card.getBoundingClientRect();
-      
-      const width = rect.width;
-      const height = rect.height;
-      
-      // Calculate cursor coordinates relative to card center
-      const mouseX = e.clientX - rect.left - width / 2;
-      const mouseY = e.clientY - rect.top - height / 2;
-
-      // Normalize offsets (-1 to 1)
-      const normX = mouseX / (width / 2);
-      const normY = mouseY / (height / 2);
-
-      // Bounded tilt angle limits (max ±7 degrees)
-      const maxTilt = 7;
-      const rotateX = -normY * maxTilt;
-      const rotateY = normX * maxTilt;
-
-      // Update positions
-      rotateXTo(rotateX);
-      rotateYTo(rotateY);
-      zTo(10); // Subtle pop-out depth
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      const normX = mouseX / (rect.width / 2);
+      const normY = mouseY / (rect.height / 2);
+      rotationXTo(-normY * 7);
+      rotationYTo(normX * 7);
+      zTo(10);
     };
 
     const handleMouseLeave = () => {
-      // Reset card tilt smoothly
-      rotateXTo(0);
-      rotateYTo(0);
+      rotationXTo(0);
+      rotationYTo(0);
       zTo(0);
     };
 
@@ -63,11 +48,8 @@ const DepthCard = ({ children, className = "" }) => {
   return (
     <div
       ref={cardRef}
-      style={{
-        transformStyle: 'preserve-3d',
-        perspective: '1000px'
-      }}
-      className={`relative bg-surface border border-border rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(124,92,255,0.18)] hover:border-accent/30 overflow-hidden will-change-transform ${className}`}
+      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+      className={`relative bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out rounded-[24px] p-6 overflow-hidden will-change-transform ${className}`}
     >
       {/* Dynamic light reflection overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />

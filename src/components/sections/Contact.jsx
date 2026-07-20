@@ -87,7 +87,7 @@ const Contact = () => {
         
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">07 / Inquiry</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Inquiry</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Get In Touch</h2>
         </div>
 
@@ -109,7 +109,7 @@ const Contact = () => {
             <div className="flex flex-col gap-4">
               <a
                 href={`mailto:${socialsData.email}`}
-                className="flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-accent/40 transition-colors duration-200"
+                className="flex items-center gap-4 p-4 bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out rounded-2xl"
               >
                 <div className="p-2.5 bg-base border border-border rounded-lg text-accent">
                   <Mail size={20} />
@@ -122,7 +122,7 @@ const Contact = () => {
 
               <a
                 href={`tel:${socialsData.phone}`}
-                className="flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-accent/40 transition-colors duration-200"
+                className="flex items-center gap-4 p-4 bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out rounded-2xl"
               >
                 <div className="p-2.5 bg-base border border-border rounded-lg text-accent">
                   <Phone size={20} />
@@ -263,7 +263,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-accent text-base rounded-xl font-bold tracking-wide hover:bg-accent/80 transition-colors disabled:bg-accent/50 cursor-pointer select-none border border-transparent focus:border-text"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-accent text-[#0A0A0A] border border-white/20 shadow-[0_6px_16px_rgba(124,92,255,0.3),inset_2.5px_2.5px_5px_rgba(255,255,255,0.35),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.35)] hover:bg-[#8b6eff] hover:-translate-y-[1.5px] hover:scale-[1.01] hover:shadow-[0_10px_20px_rgba(124,92,255,0.45),inset_3px_3px_6px_rgba(255,255,255,0.4),inset_-3px_-3px_6px_rgba(0,0,0,0.3)] active:scale-[0.99] active:translate-y-0 active:shadow-[0_4px_10px_rgba(124,92,255,0.25),inset_1.5px_1.5px_3px_rgba(255,255,255,0.2),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.4)] transition-all duration-300 disabled:bg-accent/50 disabled:shadow-none disabled:translate-y-0 disabled:scale-100 rounded-xl font-bold tracking-wide cursor-pointer select-none"
                   >
                     {status === 'submitting' ? (
                       <>
