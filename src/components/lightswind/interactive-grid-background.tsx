@@ -156,11 +156,9 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
 
     const glowColor = isDarkMode ? darkEffectColor : effectColor;
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      return;
-    }
+    let animationFrameId: number | undefined;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     // Initialize idle positions
     idleTargetsRef.current = Array.from({ length: idleRandomCount }, () => ({
@@ -168,8 +166,6 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
       y: Math.floor(Math.random() * rows),
     }));
     idlePositionsRef.current = idleTargetsRef.current.map((p) => ({ ...p }));
-
-    let animationFrameId: number;
 
     const draw = () => {
        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -225,11 +221,39 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    draw();
+    const handleMotionChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) {
+        if (animationFrameId !== undefined) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = undefined;
+        }
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      } else if (animationFrameId === undefined) {
+        draw();
+      }
+    };
+
+    if (mediaQuery.matches) {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    } else {
+      draw();
+    }
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleMotionChange);
+    } else {
+      mediaQuery.addListener(handleMotionChange);
+    }
 
     return () => {
-      if (animationFrameId) {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleMotionChange);
+      } else {
+        mediaQuery.removeListener(handleMotionChange);
+      }
+      if (animationFrameId !== undefined) {
         cancelAnimationFrame(animationFrameId);
+        animationFrameId = undefined;
       }
     };
   }, [
