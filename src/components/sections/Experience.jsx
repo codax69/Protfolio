@@ -8,6 +8,7 @@ import { gsap } from '../../animations/gsapConfig';
 
 const Experience = () => {
   const containerRef = useRef(null);
+  const timelineRef = useRef(null);
   const progressBarRef = useRef(null);
 
   // Stagger timeline nodes
@@ -15,7 +16,7 @@ const Experience = () => {
 
   // Animate the timeline progress bar on scroll (scrubbing)
   useGSAP(() => {
-    if (!progressBarRef.current || !containerRef.current) return;
+    if (!progressBarRef.current || !timelineRef.current) return;
     
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
@@ -29,9 +30,9 @@ const Experience = () => {
         scaleY: 1,
         ease: "none",
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 40%",
-          end: "bottom 60%",
+          trigger: timelineRef.current,
+          start: "top 75%",
+          end: "bottom 70%",
           scrub: 0.5
         }
       }
@@ -40,6 +41,8 @@ const Experience = () => {
 
   return (
     <section ref={containerRef} id="experience" className="relative py-24 bg-base border-t border-border overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -50,7 +53,7 @@ const Experience = () => {
         </div>
 
         {/* Timeline container */}
-        <div className="relative max-w-4xl border-l border-border pl-6 ml-4 md:pl-8 md:ml-8 flex flex-col gap-12">
+        <div ref={timelineRef} className="relative max-w-4xl border-l border-border pl-6 ml-4 md:pl-8 md:ml-8 flex flex-col gap-12">
           
           {/* Vertical scroll progress indicator */}
           <div
@@ -100,7 +103,7 @@ const Experience = () => {
                   {exp.highlights.map((bullet, bIdx) => (
                     <li key={bIdx} className="flex gap-3">
                       <ShieldCheck size={18} className="text-accent shrink-0 mt-0.5" />
-                      <span className='text-white'>{bullet}</span>
+                      <span className='text-text'>{bullet}</span>
                     </li>
                   ))}
                 </ul>

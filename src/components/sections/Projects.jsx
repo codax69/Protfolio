@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { projectsData } from '../../data/projects';
 import DepthCard from '../ui/DepthCard';
 import { ExternalLink, Code, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -22,21 +22,24 @@ const ProjectImageSlider = ({ images, title, fallbackImage }) => {
 
   const totalSlides = images ? images.length : 0;
 
+  const stopAutoplay = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  }, []);
+
   // Autoplay function
-  const startAutoplay = () => {
+  const startAutoplay = useCallback(() => {
     stopAutoplay();
     if (totalSlides <= 1) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
     timerRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides);
     }, 4000); // Transition to next slide every 4 seconds
-  };
-
-  const stopAutoplay = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-  };
+  }, [totalSlides, stopAutoplay]);
 
   // GSAP slide animation
   useGSAP(() => {
@@ -57,9 +60,12 @@ const ProjectImageSlider = ({ images, title, fallbackImage }) => {
 
   // Autoplay lifecycle mounting
   useEffect(() => {
-    startAutoplay();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      startAutoplay();
+    }
     return () => stopAutoplay();
-  }, [totalSlides]);
+  }, [startAutoplay, stopAutoplay]);
 
   // Arrow controls (resets autoplay interval)
   const handleNext = (e) => {
@@ -159,6 +165,8 @@ const Projects = () => {
 
   return (
     <section ref={containerRef} id="projects" className="relative py-24 bg-base border-t border-border overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -189,7 +197,7 @@ const Projects = () => {
                         title={project.title}
                         fallbackImage={project.image}
                       />
-                      <div className="absolute top-4 left-4 bg-gradient-to-br from-[#141414]/90 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 px-3 py-1 rounded-full text-xs font-semibold text-accent z-20 shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
+                      <div className="absolute top-4 left-4 bg-gradient-to-br from-surface to-base border border-border px-3 py-1 rounded-full text-xs font-semibold text-accent z-20 shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
                         {project.type}
                       </div>
                     </div>
@@ -202,7 +210,7 @@ const Projects = () => {
                           <h3 className="font-display font-bold text-2xl text-text leading-tight">
                             {project.title}
                           </h3>
-                          <span className="text-xs font-medium text-muted bg-gradient-to-br from-[#141414]/90 to-[#0A0A0A]/95 border border-[#7C5CFF]/10 px-2.5 py-1 rounded-full whitespace-nowrap shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
+                          <span className="text-xs font-medium text-muted bg-gradient-to-br from-surface to-base border border-border px-2.5 py-1 rounded-full whitespace-nowrap shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
                             {project.date}
                           </span>
                         </div>

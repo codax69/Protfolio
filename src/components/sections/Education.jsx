@@ -29,7 +29,7 @@ const Education = () => {
         ease: "none",
         scrollTrigger: {
           trigger: timelineRef.current,
-          start: "top 80%",
+          start: "top 75%",
           end: "bottom 70%",
           scrub: 0.5
         }
@@ -60,6 +60,8 @@ const Education = () => {
 
   return (
     <section ref={containerRef} id="education" className="relative py-24 bg-base border-t border-border overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -87,7 +89,7 @@ const Education = () => {
               </div>
 
               {/* Card Details */}
-              <div className="bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out p-6 rounded-[24px]">
+              <div className="premium-card p-6 rounded-[24px]">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
                   <div>
                     <h3 className="font-display font-bold text-lg text-text">

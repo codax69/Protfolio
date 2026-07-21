@@ -57,14 +57,14 @@ const Hero = () => {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3.5 mt-6 w-full sm:w-auto">
               <MagneticButton
-                className="w-full bg-accent text-[#0A0A0A] border border-white/20 shadow-[0_6px_16px_rgba(124,92,255,0.3),inset_2.5px_2.5px_5px_rgba(255,255,255,0.35),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.35)] hover:bg-[#8b6eff] hover:shadow-[0_10px_20px_rgba(124,92,255,0.45),inset_3px_3px_6px_rgba(255,255,255,0.4),inset_-3px_-3px_6px_rgba(0,0,0,0.3)] transition-all duration-300"
+                className="btn-accent-glow w-full"
                 onClick={() => scrollToSection('#projects')}
               >
                 View Work
                 <ArrowRight size={14} className="stroke-[2.5]" />
               </MagneticButton>
               <a href={socialsData.resumeUrl} download className="w-full sm:w-auto">
-                <MagneticButton className="w-full bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[4px_4px_12px_rgba(0,0,0,0.5),inset_2.5px_2.5px_5px_rgba(255,255,255,0.04),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.6)] hover:border-[#7C5CFF]/45 hover:text-accent hover:shadow-[6px_6px_16px_rgba(124,92,255,0.15),inset_3px_3px_6px_rgba(255,255,255,0.05),inset_-3px_-3px_6px_rgba(0,0,0,0.6)] transition-all duration-300">
+                <MagneticButton className="w-full premium-card hover:bg-btn-hover-bg hover:text-btn-hover-text hover:border-btn-hover-border transition-all duration-300">
                   Download Resume
                   <Download size={14} className="stroke-[2.5]" />
                 </MagneticButton>

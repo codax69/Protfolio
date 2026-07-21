@@ -56,8 +56,7 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
   return (
     <div
       className={cn(
-        "relative p-6 bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] rounded-[24px] text-text",
-        "transition-all duration-400 ease-out",
+        "relative p-6 premium-card rounded-[24px] text-text" ,
         className
       )}
       style={{

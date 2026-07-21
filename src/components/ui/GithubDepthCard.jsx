@@ -95,10 +95,17 @@ const GithubDepthCard = ({ children, className = '' }) => {
       const sY   = (8  + mag * 22).toFixed(1);
       const sBlr = (20 + mag * 45).toFixed(1);
       const sSpr = (mag * 10).toFixed(1);
-      const sAlp = Math.min(0.08 + mag * 0.30, 0.38).toFixed(3);
+
+      // Claymorphic double inset shadows + dynamic drop shadow
+      const isDark = document.documentElement.classList.contains('dark');
+      const innerHighlight = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 1)';
+      const innerShadow = isDark ? 'rgba(0, 0, 0, 0.45)' : 'rgba(0, 0, 0, 0.06)';
+      const outerShadowColor = isDark ? 'rgba(0, 0, 0, 0.65)' : 'rgba(0, 0, 0, 0.04)';
+
       card.style.boxShadow =
-        `0 ${sY}px ${sBlr}px ${sSpr}px rgba(124,92,255,${sAlp}),` +
-        `0 2px 10px rgba(0,0,0,0.35)`;
+        `inset 6px 6px 14px ${innerHighlight}, ` +
+        `inset -8px -8px 16px ${innerShadow}, ` +
+        `${-s.rotY.toFixed(1)}px ${sY}px ${sBlr}px ${sSpr}px ${outerShadowColor}`;
 
       /* Border brightens proportionally with tilt magnitude */
       const bAlp = Math.min(0.06 + mag * 0.44, 0.50).toFixed(3);
@@ -215,7 +222,7 @@ const GithubDepthCard = ({ children, className = '' }) => {
         tabIndex={-1}
         className={[
           'relative h-full',
-          'bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out rounded-[24px] overflow-hidden',
+          'clay-card rounded-[24px] overflow-hidden',
           'will-change-transform',
           // Keyboard focus ring — never interferes with pointer animation
           'focus-within:ring-2 focus-within:ring-accent/40 focus-within:outline-none',
@@ -270,7 +277,7 @@ const GithubDepthCard = ({ children, className = '' }) => {
          * Layer 3 — content slot.
          * Sits above both decorative layers (z-index: 10).
          */}
-        <div className="relative h-full" style={{ zIndex: 10 }}>
+        <div className="relative h-full" style={{ zIndex: 10, transformStyle: 'preserve-3d' }}>
           {children}
         </div>
 

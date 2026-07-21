@@ -43,6 +43,8 @@ const SkillsGrid = () => {
 
   return (
     <section ref={containerRef} id="skills" className="relative py-24 bg-base border-t border-border overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         

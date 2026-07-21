@@ -152,10 +152,10 @@ const FactCard = ({ icon: Icon, label, value, sub }) => {
   return (
     <div
       ref={cardRef}
-      className="relative flex items-start gap-4 bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] hover:border-[#7C5CFF]/40 hover:shadow-[12px_12px_32px_rgba(124,92,255,0.15),inset_4px_4px_8px_rgba(255,255,255,0.06),inset_-5px_-5px_10px_rgba(0,0,0,0.85),inset_0_0_15px_rgba(124,92,255,0.25)] transition-all duration-400 ease-out rounded-[24px] p-5 cursor-default overflow-hidden group"
+      className="relative rounded-3xl flex items-start gap-4 premium-card p-5 cursor-default overflow-hidden group"
     >
       {/* Glow bleed */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent 
                       opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
       <div
@@ -281,6 +281,9 @@ const About = () => {
       {/* Dot matrix animated backdrop */}
       <DotMatrix />
 
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
+
 
 
       {/* Mouse-chasing glow orb */}
@@ -310,7 +313,7 @@ const About = () => {
           <div className="xl:col-span-4 reveal-item flex flex-col gap-6">
 
             {/* Identity card */}
-            <div className="relative bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] rounded-3xl p-8 overflow-hidden">
+            <div className="relative premium-card rounded-3xl p-8 overflow-hidden">
               {/* Background deco */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-accent/8 rounded-bl-full blur-2xl pointer-events-none" />
               <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-accent/5 rounded-full blur-2xl pointer-events-none" />
@@ -323,7 +326,7 @@ const About = () => {
               >
                 {/* Ring glow */}
                 <div className="absolute inset-0 rounded-full bg-accent/20 blur-xl scale-110" />
-                <div className="relative w-28 h-28 rounded-full border-2 border-white/20 bg-gradient-to-br from-[#141414] to-[#0A0A0A] p-[3px] shadow-[6px_6px_18px_rgba(0,0,0,0.5),inset_3px_3px_6px_rgba(255,255,255,0.2),inset_-3px_-3px_6px_rgba(0,0,0,0.4),inset_0_0_10px_rgba(124,92,255,0.25)] overflow-hidden">
+                <div className="relative w-28 h-28 rounded-full border-2 bg-gradient-to-br from-surface to-base p-[3px] avatar-ring overflow-hidden">
                   <img
                     src={`${socialsData.github}.png`}
                     alt="Pritesh Patel"
@@ -365,7 +368,7 @@ const About = () => {
             </div>
 
             {/* Tech marquee strip */}
-            <div className="bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] rounded-2xl py-4 px-2 overflow-hidden">
+            <div className="premium-card rounded-2xl py-4 px-2 overflow-hidden">
               <p className="text-[9px] font-bold uppercase tracking-widest text-muted text-center mb-3">
                 Tech I work with
               </p>
@@ -420,24 +423,7 @@ const About = () => {
               ))}
             </div>
 
-            {/* CTA strip */}
-            <div className="reveal-item flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={() => scrollToSection('#projects')}
-                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-[#0A0A0A] border border-white/20 shadow-[0_6px_16px_rgba(124,92,255,0.3),inset_2.5px_2.5px_5px_rgba(255,255,255,0.35),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.35)] hover:bg-[#8b6eff] hover:-translate-y-[1.5px] hover:scale-[1.03] hover:shadow-[0_10px_20px_rgba(124,92,255,0.45),inset_3px_3px_6px_rgba(255,255,255,0.4),inset_-3px_-3px_6px_rgba(0,0,0,0.3)] active:scale-[0.97] transition-all duration-300 text-xs font-bold uppercase tracking-wider cursor-pointer"
-              >
-                <Target size={14} />
-                See my work
-                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-              <button
-                onClick={() => scrollToSection('#contact')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[4px_4px_12px_rgba(0,0,0,0.5),inset_2.5px_2.5px_5px_rgba(255,255,255,0.04),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.6)] hover:border-[#7C5CFF]/45 hover:text-accent hover:-translate-y-[1.5px] hover:shadow-[6px_6px_16px_rgba(124,92,255,0.15),inset_3px_3px_6px_rgba(255,255,255,0.05),inset_-3px_-3px_6px_rgba(0,0,0,0.6)] active:scale-[0.97] transition-all duration-300 text-xs font-bold uppercase tracking-wider text-muted cursor-pointer"
-              >
-                <Globe size={14} />
-                Get in touch
-              </button>
-            </div>
+            
           </div>
 
         </div>

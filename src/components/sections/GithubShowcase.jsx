@@ -290,6 +290,8 @@ const GithubShowcase = () => {
   }, []);
   return (
     <section ref={containerRef} id="github" className="py-28 bg-base border-t border-border relative overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       {/* Ambient radial glow */}
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px]
@@ -324,14 +326,14 @@ const GithubShowcase = () => {
               <div className="flex flex-col gap-4">
 
                 {/* Avatar + bio card */}
-                <div className="bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] rounded-2xl p-8 flex flex-col items-center text-center relative overflow-hidden">
+                <div className="premium-card rounded-2xl p-8 flex flex-col items-center text-center relative overflow-hidden">
                   {/* Glassmorphic grid accent */}
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute top-0 right-0 w-32 h-32 bg-accent/8 rounded-bl-full pointer-events-none blur-2xl" />
 
                   {/* Floating avatar */}
                   <div ref={avatarRef} className="relative mb-6 will-change-transform">
-                    <div className="w-28 h-28 rounded-full border-2 border-white/20 bg-gradient-to-br from-[#141414] to-[#0A0A0A] p-[3px] shadow-[6px_6px_18px_rgba(0,0,0,0.5),inset_3px_3px_6px_rgba(255,255,255,0.2),inset_-3px_-3px_6px_rgba(0,0,0,0.4),inset_0_0_10px_rgba(124,92,255,0.25)] overflow-hidden relative">
+                    <div className="w-28 h-28 rounded-full border-2 bg-gradient-to-br from-surface to-base p-[3px] avatar-ring overflow-hidden relative">
                       <img
                         src={profile?.avatar_url}
                         alt="Pritesh Patel"
@@ -386,7 +388,7 @@ const GithubShowcase = () => {
                 </div>
 
                 {/* Stats grid card */}
-                <div className="bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[8px_8px_24px_rgba(0,0,0,0.6),inset_3px_3px_6px_rgba(255,255,255,0.04),inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(124,92,255,0.1)] rounded-2xl overflow-hidden grid grid-cols-3 divide-x divide-border">
+                <div className="premium-card rounded-2xl overflow-hidden grid grid-cols-3 divide-x divide-border">
                   {[
                     { label: 'Repos', icon: BookMarked, value: profile?.public_repos ?? 32 },
                     { label: 'Followers', icon: Users, value: profile?.followers ?? 5 },
@@ -435,7 +437,7 @@ const GithubShowcase = () => {
                   href="https://github.com/codax69?tab=repositories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-[#141414]/85 to-[#0A0A0A]/95 border border-[#7C5CFF]/15 shadow-[4px_4px_12px_rgba(0,0,0,0.5),inset_2px_2px_4px_rgba(255,255,255,0.04),inset_-2px_-2px_4px_rgba(0,0,0,0.6)] hover:border-[#7C5CFF]/40 hover:text-accent hover:-translate-y-[1.5px] hover:shadow-[6px_6px_16px_rgba(124,92,255,0.15),inset_2.5px_2.5px_5px_rgba(255,255,255,0.05),inset_-2.5px_-2.5px_5px_rgba(0,0,0,0.6)] active:scale-[0.98] active:translate-y-0 rounded-full text-sm font-semibold text-muted transition-all duration-300"
+                  className="group inline-flex items-center gap-2 px-6 py-3 premium-card rounded-full text-sm font-semibold text-text transition-all duration-300 hover:bg-btn-hover-bg hover:text-btn-hover-text hover:border-btn-hover-border hover:-translate-y-[1.5px] active:scale-[0.98] active:translate-y-0"
                 >
                   <Github size={15} />
                   View all repositories

@@ -2,13 +2,107 @@
 
 @import 'tailwindcss';
 @plugin 'lightswind/plugin';
-@theme {
+:root {
+  --color-base: #F8F7F2;      /* Premium light warm alabaster */
+  --color-surface: #EFEFE9;   /* Soft warm light gray surface */
+  --color-border: #DCDCD3;    /* Gentle light border */
+  --color-text: #1A1916;      /* Deep charcoal gray for high readability text */
+  --color-muted: #6E6C62;     /* Muted gray text for secondary info */
+  --color-accent: #7C5CFF;    /* Accent color stays purple */
+  
+  --color-card-from: rgba(255, 255, 255, 0.75);
+  --color-card-to: rgba(239, 239, 233, 0.9);
+  --color-card-border: rgba(124, 92, 255, 0.12);
+  --color-card-border-hover: rgba(124, 92, 255, 0.45);
+  
+  --card-shadow: 8px 8px 24px rgba(26, 25, 22, 0.05), 
+                 inset 3px 3px 6px rgba(255, 255, 255, 0.6), 
+                 inset -4px -4px 8px rgba(26, 25, 22, 0.03), 
+                 inset 0 0 10px rgba(124, 92, 255, 0.03);
+                 
+  --card-shadow-hover: 12px 12px 32px rgba(124, 92, 255, 0.08), 
+                       inset 4px 4px 8px rgba(255, 255, 255, 0.85), 
+                       inset -5px -5px 10px rgba(26, 25, 22, 0.04), 
+                       inset 0 0 15px rgba(124, 92, 255, 0.12);
+
+  --btn-accent-text: #FFFFFF;
+  --grid-line-color: rgba(124, 92, 255, 0.06);
+  --radial-glow-color: rgba(124, 92, 255, 0.05);
+  --btn-hover-bg: #1A1916;
+  --btn-hover-text: #FAF9F6;
+  --btn-hover-border: #1A1916;
+  --clay-bg: #FFFFFF;
+  --clay-border: 1px solid rgba(255, 255, 255, 0.45);
+  --clay-shadow-outer: rgba(0, 0, 0, 0.04);
+  --clay-shadow-outer-hover: rgba(0, 0, 0, 0.06);
+  --clay-shadow-inset-light: rgba(255, 255, 255, 0.95);
+  --clay-shadow-inset-light-hover: rgba(255, 255, 255, 1);
+  --clay-shadow-inset-dark: rgba(0, 0, 0, 0.06);
+  --clay-shadow-inset-dark-hover: rgba(0, 0, 0, 0.10);
+  
+  --avatar-border: rgba(124, 92, 255, 0.2);
+  --avatar-shadow: 6px 6px 18px rgba(26, 25, 22, 0.12), 
+                   inset 3px 3px 6px rgba(255, 255, 255, 0.8), 
+                   inset -3px -3px 6px rgba(26, 25, 22, 0.08), 
+                   inset 0 0 10px rgba(124, 92, 255, 0.15);
+}
+
+.dark {
   --color-base: #0A0A0A;
   --color-surface: #141414;
   --color-border: #2A2A2A;
   --color-text: #EDEDED;
   --color-muted: #8A8A8A;
   --color-accent: #7C5CFF;
+  
+  --color-card-from: rgba(20, 20, 20, 0.85);
+  --color-card-to: rgba(10, 10, 10, 0.95);
+  --color-card-border: rgba(124, 92, 255, 0.15);
+  --color-card-border-hover: rgba(124, 92, 255, 0.4);
+  
+  --card-shadow: 8px 8px 24px rgba(0, 0, 0, 0.6), 
+                 inset 3px 3px 6px rgba(255, 255, 255, 0.04), 
+                 inset -4px -4px 8px rgba(0, 0, 0, 0.8), 
+                 inset 0 0 10px rgba(124, 92, 255, 0.1);
+                 
+  --card-shadow-hover: 12px 12px 32px rgba(124, 92, 255, 0.15), 
+                       inset 4px 4px 8px rgba(255, 255, 255, 0.06), 
+                       inset -5px -5px 10px rgba(0, 0, 0, 0.85), 
+                       inset 0 0 15px rgba(124, 92, 255, 0.25);
+
+  --btn-accent-text: #0A0A0A;
+  --grid-line-color: rgba(42, 42, 42, 0.55);
+  --radial-glow-color: rgba(124, 92, 255, 0.10);
+  --btn-hover-bg: #FFFFFF;
+  --btn-hover-text: #7C5CFF;
+  --btn-hover-border: #FFFFFF;
+  --clay-bg: #141414;
+  --clay-border: 1px solid rgba(124, 92, 255, 0.12);
+  --clay-shadow-outer: rgba(0, 0, 0, 0.5);
+  --clay-shadow-outer-hover: rgba(0, 0, 0, 0.65);
+  --clay-shadow-inset-light: rgba(255, 255, 255, 0.06);
+  --clay-shadow-inset-light-hover: rgba(255, 255, 255, 0.09);
+  --clay-shadow-inset-dark: rgba(0, 0, 0, 0.45);
+  --clay-shadow-inset-dark-hover: rgba(0, 0, 0, 0.55);
+
+  --avatar-border: rgba(255, 255, 255, 0.2);
+  --avatar-shadow: 6px 6px 18px rgba(0, 0, 0, 0.5), 
+                   inset 3px 3px 6px rgba(255, 255, 255, 0.2), 
+                   inset -3px -3px 6px rgba(0, 0, 0, 0.4), 
+                   inset 0 0 10px rgba(124, 92, 255, 0.25);
+}
+
+@theme inline {
+  --color-base: var(--color-base);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
+  --color-btn-accent-text: var(--btn-accent-text);
+  --color-btn-hover-bg: var(--btn-hover-bg);
+  --color-btn-hover-text: var(--btn-hover-text);
+  --color-btn-hover-border: var(--btn-hover-border);
   
   --font-display: "Space Grotesk", sans-serif;
   --font-sans: "Inter", sans-serif;
@@ -17,9 +111,10 @@
 /* Custom Base Styles */
 html {
   scroll-behavior: smooth;
-  background-color: #0A0A0A;
-  color: #EDEDED;
+  background-color: var(--color-base);
+  color: var(--color-text);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -27,6 +122,7 @@ body {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,16 +137,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: var(--color-base);
+  transition: background-color 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2A2A2A;
+  background: var(--color-border);
   border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7C5CFF;
+  background: var(--color-accent);
 }
 
 /* Lenis smooth scrolling rules */
@@ -74,14 +172,85 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Premium frosted glass card utility */
+.premium-card {
+  background: linear-gradient(135deg, var(--color-card-from) 0%, var(--color-card-to) 100%);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, background-color 0.4s ease;
+}
+
+.premium-card:hover {
+  border-color: var(--color-card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Claymorphic card utility */
+.clay-card {
+  border-radius: 24px;
+  background: var(--clay-bg);
+  border: var(--clay-border);
+  box-shadow: 
+    8px 8px 24px var(--clay-shadow-outer),
+    inset 4px 4px 10px var(--clay-shadow-inset-light),
+    inset -6px -6px 12px var(--clay-shadow-inset-dark);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, background-color 0.4s ease;
+}
+
+.clay-card:hover {
+  box-shadow: 
+    16px 16px 36px var(--clay-shadow-outer-hover),
+    inset 6px 6px 14px var(--clay-shadow-inset-light-hover),
+    inset -8px -8px 16px var(--clay-shadow-inset-dark-hover);
+}
+
 /* Background grid animation utilities */
 .bg-grid-pattern {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(42, 42, 42, 0.55) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(42, 42, 42, 0.55) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+  transition: background-image 0.3s ease;
 }
 
 .bg-radial-glow {
-  background: radial-gradient(circle at 50% 50%, rgba(124, 92, 255, 0.1) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, var(--radial-glow-color) 0%, transparent 60%);
+  transition: background 0.3s ease;
 }
+
+/* Glow accent button utility */
+.btn-accent-glow {
+  background-color: var(--color-accent);
+  color: var(--btn-accent-text);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 16px rgba(124, 92, 255, 0.3),
+              inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.35),
+              inset -2.5px -2.5px 5px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-accent-glow:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  border-color: var(--btn-hover-border);
+  box-shadow: 0 10px 20px rgba(124, 92, 255, 0.45),
+              inset 3px 3px 6px rgba(255, 255, 255, 0.4),
+              inset -3px -3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-accent-glow:active {
+  box-shadow: 0 4px 10px rgba(124, 92, 255, 0.25),
+              inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.2),
+              inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Theme-aware avatar ring utility */
+.avatar-ring {
+  border-color: var(--avatar-border);
+  box-shadow: var(--avatar-shadow);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
