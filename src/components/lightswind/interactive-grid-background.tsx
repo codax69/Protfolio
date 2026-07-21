@@ -38,6 +38,7 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
   fadeIntensity = 20,
   idleRandomCount = 5,
   className,
+  style,
   ...props
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -275,8 +276,8 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative ${className}`}
-      style={{ width: width || "99vw", height: height || "100vh" }}
+      className={`relative ${className || ""}`}
+      style={{ width: width ? `${width}px` : "100%", height: height ? `${height}px` : "100%", ...style }}
       {...props}
     >
       <canvas
