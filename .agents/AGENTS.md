@@ -22,9 +22,9 @@ A theme-driven, highly disciplined minimal design system supporting both Light (
 All colors must be resolved dynamically using the Tailwind utility classes mapped to CSS variables inside `src/index.css`:
 - **Base Background**: `bg-base` (maps to `#0A0A0A` in Dark, `#F8F7F2` in Light)
 - **Surface**: `bg-surface` (maps to `#141414` in Dark, `#EFEFE9` in Light)
-- **Border**: `border-border` (maps to `#2A2A2A` in Dark, `#DFDFD8` in Light)
+- **Border**: `border-border` (maps to `#2A2A2A` in Dark, `#DCDCD3` in Light)
 - **Main Text**: `text-text` (maps to `#EDEDED` in Dark, `#1A1916` in Light)
-- **Muted Text**: `text-muted` (maps to `#8A8A8A` in Dark, `#7A7870` in Light)
+- **Muted Text**: `text-muted` (maps to `#8A8A8A` in Dark, `#6E6C62` in Light)
 - **Accent Color**: `text-accent`, `bg-accent`, `border-accent` (maps to `#7C5CFF` purple in both modes)
 
 ### Claymorphic Card Component (`.clay-card`)

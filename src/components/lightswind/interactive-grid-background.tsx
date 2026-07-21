@@ -156,12 +156,20 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
 
     const glowColor = isDarkMode ? darkEffectColor : effectColor;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      return;
+    }
+
     // Initialize idle positions
     idleTargetsRef.current = Array.from({ length: idleRandomCount }, () => ({
       x: Math.floor(Math.random() * cols),
       y: Math.floor(Math.random() * rows),
     }));
     idlePositionsRef.current = idleTargetsRef.current.map((p) => ({ ...p }));
+
+    let animationFrameId: number;
 
     const draw = () => {
        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -214,10 +222,16 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
         ctx.fillRect(cell.x * gridSize, cell.y * gridSize, gridSize, gridSize);
       });
 
-      requestAnimationFrame(draw);
+      animationFrameId = requestAnimationFrame(draw);
     };
 
     draw();
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [
     dimensions.width,
     dimensions.height,

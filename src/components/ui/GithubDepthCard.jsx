@@ -222,7 +222,7 @@ const GithubDepthCard = ({ children, className = '' }) => {
         tabIndex={-1}
         className={[
           'relative h-full',
-          'clay-card rounded-[24px] overflow-hidden',
+          'clay-card rounded-[24px]',
           'will-change-transform',
           // Keyboard focus ring — never interferes with pointer animation
           'focus-within:ring-2 focus-within:ring-accent/40 focus-within:outline-none',
@@ -233,45 +233,51 @@ const GithubDepthCard = ({ children, className = '' }) => {
           transformOrigin: 'center center',
         }}
       >
-
         {/**
-         * Layer 1 — always-on diagonal glass sheen.
-         * 3% white → transparent from top-left.
-         * Gives the card a premium frosted-glass look at rest.
+         * Dedicated inner wrapper around decorative layers (sheen + glare).
+         * overflow-hidden & rounded-[inherit] clip decorative layers without
+         * flattening preserve-3d context on the root card element.
          */}
-        <div
-          aria-hidden="true"
-          style={{
-            position:      'absolute',
-            inset:         0,
-            borderRadius:  'inherit',
-            background:    'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 55%)',
-            pointerEvents: 'none',
-            zIndex:        1,
-          }}
-        />
+        <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none" style={{ zIndex: 1 }}>
+          {/**
+           * Layer 1 — always-on diagonal glass sheen.
+           * 3% white → transparent from top-left.
+           * Gives the card a premium frosted-glass look at rest.
+           */}
+          <div
+            aria-hidden="true"
+            style={{
+              position:      'absolute',
+              inset:         0,
+              borderRadius:  'inherit',
+              background:    'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 55%)',
+              pointerEvents: 'none',
+              zIndex:        1,
+            }}
+          />
 
-        {/**
-         * Layer 2 — cursor-chasing glare.
-         * backgroundImage updated every RAF frame to track the pointer.
-         * opacity controlled by CSS transition for smooth enter / leave.
-         * mixBlendMode:screen → purely additive, never darkens the card.
-         * Peak effective opacity ≈ 12% — well below the 15% spec limit.
-         */}
-        <div
-          ref={glareRef}
-          aria-hidden="true"
-          style={{
-            position:      'absolute',
-            inset:         0,
-            borderRadius:  'inherit',
-            opacity:       0,
-            pointerEvents: 'none',
-            zIndex:        2,
-            transition:    'opacity 0.35s ease',
-            mixBlendMode:  'screen',
-          }}
-        />
+          {/**
+           * Layer 2 — cursor-chasing glare.
+           * backgroundImage updated every RAF frame to track the pointer.
+           * opacity controlled by CSS transition for smooth enter / leave.
+           * mixBlendMode:screen → purely additive, never darkens the card.
+           * Peak effective opacity ≈ 12% — well below the 15% spec limit.
+           */}
+          <div
+            ref={glareRef}
+            aria-hidden="true"
+            style={{
+              position:      'absolute',
+              inset:         0,
+              borderRadius:  'inherit',
+              opacity:       0,
+              pointerEvents: 'none',
+              zIndex:        2,
+              transition:    'opacity 0.35s ease',
+              mixBlendMode:  'screen',
+            }}
+          />
+        </div>
 
         {/**
          * Layer 3 — content slot.
