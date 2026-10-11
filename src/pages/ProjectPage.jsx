@@ -164,8 +164,8 @@ const ProjectPage = () => {
     keywords: project
       ? `${project.title}, Pritesh Patel, mernstack, mern stack, webdev, webdevelopment, ${project.tech?.join(', ')}`
       : 'Pritesh Patel, webdev, mernstack, web development',
-    canonical: `https://priteshpatel.dev/proof-of-work/${id || ''}`,
-    ogImage: project?.image ? `https://priteshpatel.dev${project.image}` : undefined,
+    canonical: `https://pritesh.site/proof-of-work/${id || ''}`,
+    ogImage: project?.image ? `https://pritesh.site${project.image}` : undefined,
   });
 
   // Scroll to top on mount & reinit Lenis

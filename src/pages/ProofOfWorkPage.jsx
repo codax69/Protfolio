@@ -205,7 +205,7 @@ const ProofOfWorkPage = () => {
     title: 'Proof of Work & WebDev Projects | Pritesh Patel - MERN Stack Developer',
     description: 'Production web development (WebDev) portfolio by Pritesh Patel, Full Stack MERN Developer (mernstack). Explore real-world web apps: VegBazar, TechStore, SwapEase, and custom systems.',
     keywords: 'Pritesh Patel projects, proof of work, mernstack, mern stack, webdev, webdevelopment, web developer, VegBazar, TechStore, React, Node.js, Express, MongoDB',
-    canonical: 'https://priteshpatel.dev/proof-of-work',
+    canonical: 'https://pritesh.site/proof-of-work',
   });
 
   useEffect(() => {
