@@ -5,19 +5,19 @@ export const skillsData = [
   },
   {
     category: "Backend",
-    skills: ["Node.js", "Express.js", "REST APIs", "JWT Auth"]
+    skills: ["Node.js", "Express.js", "Python", "Django", "Django REST Framework", "REST APIs", "JWT Auth"]
   },
   {
     category: "Database",
-    skills: ["MongoDB", "Mongoose"]
+    skills: ["MongoDB", "Mongoose", "PostgreSQL", "SQL"]
   },
   {
     category: "DevOps & Infrastructure",
-    skills: ["Linux VPS", "Nginx", "PM2", "SSL/HTTPS", "DNS"]
+    skills: ["Linux", "Linux VPS", "Nginx", "PM2", "SSL/HTTPS", "DNS", "Docker", "CI/CD"]
   },
   {
-    category: "CI/CD",
-    skills: ["GitHub Actions", "Docker"]
+    category: "CI/CD & Automation",
+    skills: ["GitHub Actions", "Docker", "CI/CD Pipelines"]
   },
   {
     category: "Integrations",
