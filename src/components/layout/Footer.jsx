@@ -13,7 +13,7 @@ const Footer = () => {
             PRITESH PATEL
           </p>
           <p className="text-xs text-muted">
-            Full Stack Developer — MERN Stack
+            Full Stack MERN Developer · Modern Web Development (WebDev)
           </p>
         </div>
 

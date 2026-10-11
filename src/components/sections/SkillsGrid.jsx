@@ -52,6 +52,9 @@ const SkillsGrid = () => {
         <div className="mb-12 reveal-item">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Competencies</span>
           <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Skills & Tech Stack</h2>
+          <p className="text-muted text-sm md:text-base mt-2 max-w-xl">
+            Core technologies and tools powering my full stack MERN and modern web development workflow.
+          </p>
         </div>
 
         {/* Bento Grid Layout using GlowingCards */}

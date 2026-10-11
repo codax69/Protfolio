@@ -20,6 +20,7 @@ import { useScrollReveal } from '../animations/useScrollReveal';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { initLenis } from '../lib/lenis';
+import useSEO from '../hooks/useSEO';
 
 // ─── Image Slider ────────────────────────────────────────────────────────────
 const ImageWithFallback = ({ src, alt, className }) => {
@@ -152,6 +153,20 @@ const ProjectPage = () => {
   const heroRef = useRef(null);
 
   const project = projectsData.find((p) => p.id === id);
+
+  useSEO({
+    title: project
+      ? `${project.title} | Pritesh Patel - MERN Stack Web Development Project`
+      : 'Project Case Study | Pritesh Patel WebDev',
+    description: project
+      ? `${project.title} (${project.type}): ${project.impact || project.description}. Built with ${project.tech?.slice(0, 4).join(', ')} by Pritesh Patel (MERN developer).`
+      : 'Full stack MERN web development project case study by Pritesh Patel.',
+    keywords: project
+      ? `${project.title}, Pritesh Patel, mernstack, mern stack, webdev, webdevelopment, ${project.tech?.join(', ')}`
+      : 'Pritesh Patel, webdev, mernstack, web development',
+    canonical: `https://priteshpatel.dev/proof-of-work/${id || ''}`,
+    ogImage: project?.image ? `https://priteshpatel.dev${project.image}` : undefined,
+  });
 
   // Scroll to top on mount & reinit Lenis
   useEffect(() => {
