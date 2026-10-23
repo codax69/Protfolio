@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { socialsData } from '../../data/socials';
 import { scrollToSection } from '../../lib/lenis';
 
@@ -10,16 +9,12 @@ const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const isHome = location.pathname === '/';
 
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Experience", href: "#experience" },
-    { name: "Proof of Work", href: "/proof-of-work", isRoute: true },
+    { name: "Projects", href: "#projects" },
     { name: "Code", href: "#github" },
     { name: "Education", href: "#education" },
     { name: "Contact", href: "#contact" }
@@ -27,23 +22,6 @@ const Navbar = () => {
 
   const handleLinkClick = () => {
     setIsOpen(false);
-  };
-
-  // Smart nav handler: route links navigate directly, anchor links scroll
-  const handleNavClick = (e, link) => {
-    e.preventDefault();
-    setIsOpen(false);
-    if (link.isRoute) {
-      navigate(link.href);
-    } else if (isHome) {
-      scrollToSection(link.href);
-    } else {
-      navigate('/' + link.href);
-      setTimeout(() => {
-        const el = document.querySelector(link.href);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    }
   };
 
   useEffect(() => {
@@ -68,10 +46,10 @@ const Navbar = () => {
       <div className="px-6 h-16 flex items-center justify-between">
         {/* Logo/Name */}
         <a 
-          href={isHome ? '#hero' : '/'}
+          href="#hero" 
           onClick={(e) => {
             e.preventDefault();
-            if (isHome) { scrollToSection('#hero'); } else { navigate('/'); }
+            scrollToSection('#hero');
           }}
           className="font-display font-bold text-xl tracking-wider text-text flex items-center gap-1 group transition-[text-shadow] duration-300 hover:[text-shadow:0_0_8px_rgba(124,92,255,0.55)]"
         >
@@ -85,7 +63,10 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link)}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(link.href);
+              }}
               className="text-sm font-medium tracking-wide text-muted hover:text-text transition-all duration-300 hover:-translate-y-[1.5px] relative inline-block after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-accent after:origin-bottom-right after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 hover:after:origin-bottom-left"
             >
               {link.name}
@@ -137,7 +118,11 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                  handleLinkClick();
+                }}
                 className="text-base font-medium text-muted hover:text-text transition-colors duration-200"
               >
                 {link.name}

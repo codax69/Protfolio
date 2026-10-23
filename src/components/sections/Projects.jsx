@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { projectsData } from '../../data/projects';
 import DepthCard from '../ui/DepthCard';
-import { ExternalLink, Code, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ExternalLink, Code, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useScrollReveal } from '../../animations/useScrollReveal';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../animations/gsapConfig';
@@ -160,13 +159,12 @@ const ProjectImageSlider = ({ images, title, fallbackImage }) => {
 
 const Projects = () => {
   const containerRef = useRef(null);
-  const featuredProjects = projectsData.filter((p) => p.featured).slice(0, 3);
 
   // Stagger reveal project cards
   useScrollReveal(containerRef, '.reveal-item', 0.12);
 
   return (
-    <section ref={containerRef} id="proof-of-work" className="relative py-24 bg-base border-t border-border overflow-hidden">
+    <section ref={containerRef} id="projects" className="relative py-24 bg-base border-t border-border overflow-hidden">
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
@@ -175,13 +173,13 @@ const Projects = () => {
         {/* Section Heading */}
         <div className="mb-12 reveal-item">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Creations</span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Proof of Work</h2>
+          <h2 className="font-display font-bold text-3xl md:text-5xl mt-2 tracking-tight">Featured Projects</h2>
         </div>
 
         {/* Bento Grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          {featuredProjects.map((project, index) => {
+          {projectsData.map((project, index) => {
             const isFullWidth = index === 2;
             
             return (
@@ -199,14 +197,8 @@ const Projects = () => {
                         title={project.title}
                         fallbackImage={project.image}
                       />
-                      {/* Position badge */}
-                      <div className="absolute top-4 left-4 flex items-center gap-2 z-20">
-                        <span className="font-display font-black text-[11px] text-base bg-accent px-2.5 py-1 rounded-full tracking-wider shadow-[0_0_12px_rgba(124,92,255,0.5)]">
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-                        <span className="bg-gradient-to-br from-surface to-base border border-border px-3 py-1 rounded-full text-xs font-semibold text-accent shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
-                          {project.type}
-                        </span>
+                      <div className="absolute top-4 left-4 bg-gradient-to-br from-surface to-base border border-border px-3 py-1 rounded-full text-xs font-semibold text-accent z-20 shadow-[2px_2px_5px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.05),inset_-1px_-1px_2px_rgba(0,0,0,0.7)]">
+                        {project.type}
                       </div>
                     </div>
 
@@ -242,7 +234,7 @@ const Projects = () => {
                       </div>
 
                       {/* Links */}
-                      <div className="flex flex-wrap items-center gap-4 border-t border-border pt-6 mt-auto">
+                      <div className="flex items-center gap-4 border-t border-border pt-6 mt-auto">
                         <a
                           href={project.liveUrl}
                           target="_blank"
@@ -259,15 +251,8 @@ const Projects = () => {
                           className="flex items-center gap-2 text-sm font-semibold text-muted hover:text-text transition-colors duration-200"
                         >
                           <Code size={16} />
-                          <span>Code</span>
+                          <span>Code Repository</span>
                         </a>
-                        <Link
-                          to={`/proof-of-work/${project.id}`}
-                          className="ml-auto flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-accent hover:gap-2.5 transition-all duration-200 group"
-                        >
-                          <span>View Details</span>
-                          <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-                        </Link>
                       </div>
                     </div>
 
@@ -278,18 +263,6 @@ const Projects = () => {
           })}
 
         </div>
-
-        {/* View All Work CTA */}
-        <div className="mt-14 flex justify-center reveal-item">
-          <Link
-            to="/proof-of-work"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-surface hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 hover:-translate-y-[2px]"
-          >
-            <span className="text-sm font-semibold text-text group-hover:text-accent transition-colors duration-200">View All Work</span>
-            <ArrowRight size={15} className="text-muted group-hover:text-accent group-hover:translate-x-1 transition-all duration-200" />
-          </Link>
-        </div>
-
       </div>
     </section>
   );
