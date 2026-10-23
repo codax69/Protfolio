@@ -8,7 +8,6 @@ import { useScrollReveal } from '../animations/useScrollReveal';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { initLenis } from '../lib/lenis';
-import useSEO from '../hooks/useSEO';
 
 // ─── Image With Fallback ──────────────────────────────────────────────────────
 const ImageWithFallback = ({ src, alt, className }) => {
@@ -200,13 +199,6 @@ const ProjectCard = ({ project, index, globalRank }) => {
 const ProofOfWorkPage = () => {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
-
-  useSEO({
-    title: 'Proof of Work & WebDev Projects | Pritesh Patel - MERN Stack Developer',
-    description: 'Production web development (WebDev) portfolio by Pritesh Patel, Full Stack MERN Developer (mernstack). Explore real-world web apps: VegBazar, TechStore, SwapEase, and custom systems.',
-    keywords: 'Pritesh Patel projects, proof of work, mernstack, mern stack, webdev, webdevelopment, web developer, VegBazar, TechStore, React, Node.js, Express, MongoDB',
-    canonical: 'https://priteshpatel.dev/proof-of-work',
-  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

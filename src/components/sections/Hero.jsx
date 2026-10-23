@@ -45,13 +45,13 @@ const Hero = () => {
                 Pritesh Patel
               </RevealText>
               <h2 className="font-display text-xl md:text-3xl font-medium tracking-wide text-muted">
-                Full Stack MERN Stack Developer · Modern Web Development
+                Full Stack Developer — MERN Stack
               </h2>
             </div>
 
             {/* Hook statement */}
             <p className="max-w-2xl text-muted text-base md:text-lg leading-relaxed font-light">
-              A self-taught <span className="text-text font-medium">Full Stack MERN developer</span> passionate about modern web development (WebDev). Co-founded <span className="text-text font-medium">VegBazar</span>, a live production platform serving <span className="text-text font-medium">600+ users</span> and processing over <span className="text-text font-medium">1,500+ orders</span>. Building high-performance, polished web solutions.
+              A self-taught Full Stack MERN developer. Co-founded <span className="text-text font-medium">VegBazar</span>, a live production platform serving <span className="text-text font-medium">600+ users</span> and processing over <span className="text-text font-medium">1,500+ orders</span>. Building high-performance, polished web solutions.
             </p>
 
             {/* Actions */}
