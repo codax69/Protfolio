@@ -247,7 +247,7 @@ const About = () => {
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Surat, Gujarat, India',
+      value: 'Valsad, Gujarat, India',
       sub: 'Open to remote & on-site roles',
     },
     {

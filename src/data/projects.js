@@ -1,5 +1,17 @@
 export const projectsData = [
   {
+    id: "vegbazar",
+    title: "VegBazar — Grocery E-Commerce Platform",
+    type: "Co-Founder",
+    date: "Nov 2025 – Apr 2026",
+    impact: "Co-founded and built a full-stack MERN grocery platform from scratch. Scaled to 600+ active users, processed 1,500+ orders, and managed end-to-end deployment on a Linux VPS with Nginx, PM2, and SSL. Sole developer responsible for REST APIs, admin panel, shopping cart, checkout, and infrastructure.",
+    tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Nginx", "PM2", "Razorpay", "JWT Auth"],
+    liveUrl: "https://vegbazar.store",
+    codeUrl: "https://github.com/codax69",
+    image: "",
+    images: []
+  },
+  {
     id: "car-wash-booking",
     title: "Car Wash Booking System",
     type: "Freelance",
@@ -7,7 +19,7 @@ export const projectsData = [
     impact: "Designed slot-based booking with real-time conflict prevention, reducing manual scheduling effort by ~80%. Utilized Google Sheets API as a lightweight backend.",
     tech: ["React.js", "Tailwind CSS", "Google Sheets API", "Node.js"],
     liveUrl: "https://yourcarwasher.in",
-    codeUrl: "https://github.com/codax69/car-washer", // Placeholder if code is private, standard format
+    codeUrl: "https://github.com/codax69/car-washer",
     image: "/assets/YCW/home.png",
     images: [
       "/assets/YCW/home.png",
@@ -40,7 +52,8 @@ export const projectsData = [
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "JWT Auth", "QR Generator"],
     liveUrl: "https://attendance-two-ruddy.vercel.app",
     codeUrl: "https://github.com/codax69/qr-attendance",
-    image: "",
-    images: []
+    image: "/assets/qr-attendance.png",
+    images: ["/assets/qr-attendance.png"]
   }
 ];
+

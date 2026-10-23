@@ -180,7 +180,8 @@ const Projects = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {projectsData.map((project, index) => {
-            const isFullWidth = index === 2;
+            // VegBazar (index 0) = hero full-width, freelance pair = 6+6, QR = full-width
+            const isFullWidth = index === 0 || index === 3;
             
             return (
               <div

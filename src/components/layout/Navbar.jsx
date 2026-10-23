@@ -37,6 +37,7 @@ const Navbar = () => {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={`left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-50 rounded-full transition-all duration-300 premium-card ${
         isSticky
           ? 'fixed top-4 animate-slide-down'
@@ -102,8 +103,10 @@ const Navbar = () => {
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
             className="text-text p-2 hover:bg-surface rounded-full transition-transform hover:scale-110 active:scale-90 duration-300"
-            aria-label="Toggle menu"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -112,7 +115,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full premium-card rounded-2xl z-50 animate-fade-in">
+        <div id="mobile-menu" className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full premium-card rounded-2xl z-50 animate-fade-in" role="navigation" aria-label="Mobile navigation">
           <div className="px-6 py-6 flex flex-col gap-5">
             {navLinks.map((link) => (
               <a

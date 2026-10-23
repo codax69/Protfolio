@@ -56,9 +56,9 @@ const Contact = () => {
 
     setStatus('submitting');
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_placeholder';
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_placeholder';
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'public_placeholder';
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_placeholder';
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_placeholder';
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'public_placeholder';
 
     if (serviceId === 'service_placeholder' || templateId === 'template_placeholder' || publicKey === 'public_placeholder') {
       setTimeout(() => {
@@ -100,11 +100,17 @@ const Contact = () => {
           <div className="lg:col-span-5 flex flex-col gap-8 reveal-item">
             <div>
               <h3 className="font-display font-bold text-2xl text-text mb-4">
-                Let's build something together
+                Let's work together
               </h3>
-              <p className="text-muted leading-relaxed font-light">
-                Whether you have a freelance project, a job opening, or just want to connect, feel free to drop me a message. I'll get back to you as soon as possible.
+              <p className="text-muted leading-relaxed font-light mb-4">
+                I'm currently open to <span className="text-text font-medium">junior developer roles</span> (full-stack, front-end, or back-end), <span className="text-text font-medium">freelance projects</span>, and technical collaborations. I respond to every message within 24 hours.
               </p>
+              <ul className="flex flex-col gap-2 text-sm text-muted font-light">
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />Discussing a software engineering opportunity</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />Freelance web application development</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />Talking about MERN stack or full-stack development</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />Building a product or startup idea</li>
+              </ul>
             </div>
 
             {/* Direct Details Card */}
