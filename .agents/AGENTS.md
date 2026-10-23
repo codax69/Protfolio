@@ -4,9 +4,9 @@ This file serves as the context sheet and style rules document for any AI agents
 
 ## 🚀 Tech Stack
 
-- **Framework**: React.js (built with Vite)
-- **Styling**: Tailwind CSS v4 (native compilation via `@tailwindcss/vite` plugin in `vite.config.js`)
-- **Theme Manager**: `next-themes` (linked using `<ThemeProvider attribute="class" defaultTheme="dark">` inside `main.jsx`)
+- **Framework**: Next.js (Pages Router)
+- **Styling**: Tailwind CSS v4 (compiled via `@tailwindcss/postcss` in `postcss.config.mjs`)
+- **Theme Manager**: `next-themes` (linked using `<ThemeProvider attribute="class" defaultTheme="dark">` inside `src/pages/_app.jsx`)
 - **Animations**: GSAP + `@gsap/react` (`useGSAP` hook) + `ScrollTrigger` plugin
 - **Scroll System**: Lenis (synchronized to GSAP's ticker in `src/lib/lenis.js`)
 - **Icons**: `lucide-react`
