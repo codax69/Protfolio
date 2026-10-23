@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://priteshpatel.dev/sitemap.xml
+Sitemap: https://pritesh.site/sitemap.xml

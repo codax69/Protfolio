@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-const DOMAIN = 'https://priteshpatel.dev';
+const DOMAIN = 'https://pritesh.site';
 
 export default function Document() {
   const structuredData = [
